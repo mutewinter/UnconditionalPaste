@@ -123,7 +123,8 @@ function! s:CreateMappings()
 	    \   string(l:pasteCmd),
 	    \   l:mappingName
 	    \)
-	    if ! hasmapto(l:plugMappingName, 'n')
+
+	    if ! hasmapto(l:plugMappingName, 'n') && ! exists('g:UnconditionalPaste_NoDefaultMappings')
 		execute printf('nmap g%s%s %s',
 		\   l:pasteType,
 		\   l:pasteCmd,
@@ -156,6 +157,7 @@ function! s:CreateMappings()
 	endif
     endfor
 endfunction
+
 call s:CreateMappings()
 delfunction s:CreateMappings
 
